@@ -31,7 +31,7 @@ public static class Seed
                 Time = DateTimeOffset.Parse("2025-03-18T11:00:00Z", CultureInfo.InvariantCulture),
                 Person = "Jane Doe",
                 Position = "CTO",
-                CompanyAndBoothNumber = "ACME Inc., 123",
+                CompanyAndBoothNumber = "ACME Inc., 124",
                 Email = "no-reply.jane.doe@acme.inc",
                 LinkedIn = "https://www.linkedin.com/in/janedoe",
                 Source = "LinkedIn",
