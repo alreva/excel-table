@@ -23,4 +23,4 @@ jobs:
         run: |
           IMAGE_TAG=${{ github.sha }}
           docker build -f ExcelTable/Dockerfile -t exceltable:$IMAGE_TAG .
-          docker push ghcr.io/${{ github.repository }}:$IMAGE_TAG
+          docker push ghcr.io/${{ github.actor }}/exceltable:$IMAGE_TAG
