@@ -22,8 +22,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Define Image Tag
+        run: |
+          echo "IMAGE_TAG=ghcr.io/${{ github.actor }}/exceltable:${{ github.sha }}" >> $GITHUB_ENV
+
       - name: Build and Tag Image
         run: |
-          IMAGE_TAG=ghcr.io/${{ github.actor }}/exceltable:${{ github.sha }}
-          docker build -f ExcelTable/Dockerfile -t $IMAGE_TAG .
-          docker push $IMAGE_TAG
+          docker build -f ExcelTable/Dockerfile -t ${{ env.IMAGE_TAG }} .
+
+      - name: Push Image to GitHub Container Registry
+        run: |
+          docker push ${{ env.IMAGE_TAG }}
