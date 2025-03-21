@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v6.5.0
         with:
           file: ExcelTable/Dockerfile
-          context: ExcelTable
+          context: .
           push: true
           tags: ${{ env.IMAGE_TAG }}
 
