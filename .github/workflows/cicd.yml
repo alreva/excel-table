@@ -26,9 +26,9 @@ jobs:
         run: |
           echo "IMAGE_TAG=ghcr.io/${{ github.actor }}/exceltable:${{ github.sha }}" >> $GITHUB_ENV
 
-      - name: Build and Tag Image
-        run: |
-          docker build -f ExcelTable/Dockerfile -t ${{ env.IMAGE_TAG }} .
+      #- name: Build and Tag Image
+      #  run: |
+      #    docker build -f ExcelTable/Dockerfile -t ${{ env.IMAGE_TAG }} .
 
       #- name: Push Image to GitHub Container Registry
       #  run: |
@@ -38,7 +38,7 @@ jobs:
         id: push
         uses: docker/build-push-action@v6.5.0
         with:
-          context: .
+          context: ExcelTable
           push: true
           tags: ${{ env.IMAGE_TAG }}
 
