@@ -57,6 +57,7 @@ jobs:
             cd ${{ env.DEPLOY_DIR }}
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
             docker pull ${{ env.IMAGE_TAG }}
+            export EXCELTABLE_IMAGE=${{ env.IMAGE_TAG }}
             docker-compose -f compose.yaml -f compose.prod.yaml down
             docker-compose -f compose.yaml -f compose.prod.yaml up -d
 
