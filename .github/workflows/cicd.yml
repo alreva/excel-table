@@ -44,7 +44,8 @@ jobs:
           passphrase: ${{ secrets.DIGITALOCEAN_SSH_PASSPHRASE }}
           script: |
             IMAGE_TAG=${{ github.sha }}
-            docker pull -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ${{ env.IMAGE_TAG }}
+            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+            docker pull ${{ env.IMAGE_TAG }}
             docker stop exceltable || true
             docker rm exceltable || true
             docker run -d --name exceltable -p 8080:8080 ${{ env.IMAGE_TAG }}
