@@ -35,12 +35,13 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_TAG }}
 
-      - name: Deploy to DigitalOcean with AppleBoy
+      - name: Deploy to DigitalOcean
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DIGITALOCEAN_HOST }}
           username: ${{ secrets.DIGITALOCEAN_USER }}
           key: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
+          passphrase: ${{ secrets.DIGITALOCEAN_SSH_PASSPHRASE }}
           script: |
             IMAGE_TAG=${{ github.sha }}
             docker pull ${{ env.IMAGE_TAG }}
