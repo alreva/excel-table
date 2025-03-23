@@ -1,4 +1,4 @@
 ﻿services:
   api:
-    image: exceltable
+    image: ${EXCELTABLE_IMAGE}
     build: none
