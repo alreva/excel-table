@@ -25,7 +25,7 @@ jobs:
       - name: Define ENV vars
         run: |
           echo "IMAGE_TAG=ghcr.io/${{ github.actor }}/exceltable:${{ github.sha }}" >> $GITHUB_ENV
-          echo "DEPLOY_DIR=~/${{ github.sha }}" >> $GITHUB_ENV
+          echo "DEPLOY_DIR=~/exceltable-compose" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         id: push
