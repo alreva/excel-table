@@ -54,24 +54,28 @@ public static class ExcelTableImporter
 
     private static DateTimeOffset? ParseDateTime(ExcelRange cell)
     {
+        DateTime meetingBaseTime;
         if (cell.Value is DateTime dt)
         {
             // Excel date detected correctly
-            var nonTimeZoneDate
-                = new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, DateTimeKind.Utc);
-            return new DateTimeOffset(dt, CetZone.GetUtcOffset(nonTimeZoneDate));
+            meetingBaseTime = dt;
         }
-        if (double.TryParse(cell.Text, out var oaDate))
+        else if (double.TryParse(cell.Text, out var oaDate))
         {
             // Excel numeric date
-            return new DateTimeOffset(DateTime.FromOADate(oaDate), TimeSpan.Zero);
+            meetingBaseTime = DateTime.FromOADate(oaDate);
         }
-        if (DateTimeOffset.TryParse(cell.Text, Culture, out var parsedDto))
+        else if (DateTime.TryParse(cell.Text, Culture, out var parsedDto))
         {
             // Plain string parsing (fallback)
-            return parsedDto;
+            meetingBaseTime =  parsedDto;
+        }
+        else
+        {
+            return null; // fallback
         }
 
-        return null; // fallback
+        return new DateTimeOffset(meetingBaseTime, CetZone.GetUtcOffset(meetingBaseTime))
+            .ToUniversalTime();
     }
 }
