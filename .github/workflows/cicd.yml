@@ -28,14 +28,21 @@ jobs:
           echo "WEB_IMAGE_TAG=ghcr.io/${{ github.actor }}/exceltableweb:${{ github.sha }}" >> $GITHUB_ENV
           echo "DEPLOY_DIR=~/exceltable-compose" >> $GITHUB_ENV
 
-      - name: Build and push WEB and API Docker images
-        id: push
+      - name: Build and push API Docker image
+        uses: docker/build-push-action@v6.5.0
+        with:
+          file: ExcelTable/Dockerfile
+          context: .
+          push: true
+          tags: ${{ env.API_IMAGE_TAG }}
+
+      - name: Build and push WEB Docker image
         uses: docker/build-push-action@v6.5.0
         with:
           file: excel-table-web/Dockerfile
           context: .
           push: true
-          tags: ${{ env.WEB_IMAGE_TAG }},${{ env.API_IMAGE_TAG }}
+          tags: ${{ env.WEB_IMAGE_TAG }}
 
       - name: Copy Compose Files to Droplet
         uses: appleboy/scp-action@master
