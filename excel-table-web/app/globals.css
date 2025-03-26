@@ -29,7 +29,7 @@ body {
 }
 
 .container {
-  width: 800px;
+  width: 1200px;
   height: 100%; /* Takes up entire page height */
   box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional styling */
   overflow: auto; /* Adds scrolling if content overflows */
