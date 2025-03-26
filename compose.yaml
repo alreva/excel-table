@@ -15,6 +15,7 @@
       - "5432:5432"
   api:
     image: exceltable
+    restart: always
     build:
       context: .
       dockerfile: ExcelTable/Dockerfile
@@ -29,6 +30,7 @@
         condition: service_healthy
   web:
     image: exceltableweb
+    restart: always
     build:
       context: .
       dockerfile: excel-table-web/Dockerfile
