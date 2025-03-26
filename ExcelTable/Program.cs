@@ -1,7 +1,10 @@
 using ExcelTable;
 using ExcelTable.DataAccess;
 using ExcelTable.GraphQl;
+using ExcelTable.Import;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +36,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAntiforgery();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -47,7 +52,18 @@ if (app.Environment.IsDevelopment())
     await ctx.SeedSampleData();
 }
 
+app.UseAntiforgery();
 app.UseHttpsRedirection();
 app.UseCors();
+
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+app.MapPost("/file", async (
+    IFormFile file,
+    ExcelTableDbContext dbContext) =>
+{
+    await dbContext.ImportExcel(file);
+    return Results.Ok();
+}).DisableAntiforgery();
 
 await app.RunAsync();
