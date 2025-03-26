@@ -94,15 +94,7 @@ const ExcelTable = () => {
   const cols:ColDef[] = [
     { field: "id" },
     { field: "progress" },
-    { field: "time",
-      valueFormatter: params => {
-        if (!params.value) {
-          return "";
-        }
-        const dt = new Date(params.value);
-        return `${dt.toDateString()} ${dt.toLocaleTimeString()}`
-      }
-    },
+    { field: "time" },
     { field: "person" },
     { field: "position" },
     { field: "companyAndBoothNumber" },
