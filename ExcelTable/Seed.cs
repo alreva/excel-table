@@ -15,7 +15,7 @@ public static class Seed
             new()
             {
                 Progress = "In progress",
-                Time = DateTimeOffset.Parse("2025-03-18T10:00:00Z", CultureInfo.InvariantCulture),
+                Time = "March 18 1PM",
                 Person = "John Doe",
                 Position = "CEO",
                 CompanyAndBoothNumber = "ACME Inc., 123",
@@ -28,7 +28,7 @@ public static class Seed
             new()
             {
                 Progress = "In progress",
-                Time = DateTimeOffset.Parse("2025-03-18T11:00:00Z", CultureInfo.InvariantCulture),
+                Time = "2025-03-18 11:00",
                 Person = "Jane Doe",
                 Position = "CTO",
                 CompanyAndBoothNumber = "ACME Inc., 124",

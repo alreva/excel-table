@@ -1,7 +1,11 @@
 ﻿services:
+  db:
+    restart: always
   api:
     image: ${EXCELTABLE_IMAGE}
     build: none
+    restart: always
   web:
     image: ${EXCELTABLEWEB_IMAGE}
     build: none
+    restart: always
