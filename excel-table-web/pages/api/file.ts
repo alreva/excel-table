@@ -13,18 +13,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const form = new formidable.IncomingForm();
 
-  let fields;
   let files;
   try {
-    [fields, files] = await form.parse(req);
-  } catch (err:any) {
+    [, files] = await form.parse(req);
+  } catch (err: unknown) {
     if (err) return res.status(500).json({ error: 'Upload error' });
     // example to check for a very specific error
-    if (err.code === formidable.errors.maxFieldsExceeded) {
+    if (
+      typeof err === 'object' &&
+      err !== null &&
+      'code' in err &&
+      (err as { code: number }).code === formidable.errors.maxFieldsExceeded
+    ) {
       // ignore
     }
     console.error(err);
-    res.writeHead(err.httpCode || 400, { 'Content-Type': 'text/plain' });
+    res.writeHead((err as { httpCode?: number }).httpCode ?? 400, { 'Content-Type': 'text/plain' });
     res.end(String(err));
     return;
   }
