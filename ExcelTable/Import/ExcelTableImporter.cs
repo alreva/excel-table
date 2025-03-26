@@ -7,6 +7,7 @@ namespace ExcelTable.Import;
 public static class ExcelTableImporter
 {
     private static readonly CultureInfo Culture = CultureInfo.GetCultureInfo("en-US");
+    private static TimeZoneInfo CetZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
     
     public static async Task ImportExcel(
         this ExcelTableDbContext db,
@@ -27,14 +28,12 @@ public static class ExcelTableImporter
             {
                 continue;
             }
-            
+
             meetings.Add(new Meeting
             {
                 Id = id,
                 Progress = worksheet.Cells[row, 2].Text,
-                Time = DateTimeOffset.TryParse(worksheet.Cells[row, 3].Text, Culture, out var dt)
-                    ? dt
-                    : null,
+                Time = ParseDateTime(worksheet.Cells[row, 3]),
                 Person = worksheet.Cells[row, 4].Text,
                 Position = worksheet.Cells[row, 5].Text,
                 CompanyAndBoothNumber = worksheet.Cells[row, 6].Text,
@@ -51,5 +50,28 @@ public static class ExcelTableImporter
         db.Meetings.AddRange(meetings);
         await db.SaveChangesAsync();
         await transaction.CommitAsync();
+    }
+
+    private static DateTimeOffset? ParseDateTime(ExcelRange cell)
+    {
+        if (cell.Value is DateTime dt)
+        {
+            // Excel date detected correctly
+            var nonTimeZoneDate
+                = new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, DateTimeKind.Utc);
+            return new DateTimeOffset(dt, CetZone.GetUtcOffset(nonTimeZoneDate));
+        }
+        if (double.TryParse(cell.Text, out var oaDate))
+        {
+            // Excel numeric date
+            return new DateTimeOffset(DateTime.FromOADate(oaDate), TimeSpan.Zero);
+        }
+        if (DateTimeOffset.TryParse(cell.Text, Culture, out var parsedDto))
+        {
+            // Plain string parsing (fallback)
+            return parsedDto;
+        }
+
+        return null; // fallback
     }
 }

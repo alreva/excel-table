@@ -96,6 +96,9 @@ const ExcelTable = () => {
     { field: "progress" },
     { field: "time",
       valueFormatter: params => {
+        if (!params.value) {
+          return "";
+        }
         const dt = new Date(params.value);
         return `${dt.toDateString()} ${dt.toLocaleTimeString()}`
       }
