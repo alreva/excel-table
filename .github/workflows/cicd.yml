@@ -24,17 +24,27 @@ jobs:
 
       - name: Define ENV vars
         run: |
-          echo "IMAGE_TAG=ghcr.io/${{ github.actor }}/exceltable:${{ github.sha }}" >> $GITHUB_ENV
+          echo "API_IMAGE_TAG=ghcr.io/${{ github.actor }}/exceltable:${{ github.sha }}" >> $GITHUB_ENV
+          echo "WEB_IMAGE_TAG=ghcr.io/${{ github.actor }}/exceltableweb:${{ github.sha }}" >> $GITHUB_ENV
           echo "DEPLOY_DIR=~/exceltable-compose" >> $GITHUB_ENV
 
-      - name: Build and push Docker image
+      - name: Build and push API Docker image
         id: push
         uses: docker/build-push-action@v6.5.0
         with:
           file: ExcelTable/Dockerfile
           context: .
           push: true
-          tags: ${{ env.IMAGE_TAG }}
+          tags: ${{ env.API_IMAGE_TAG }}
+
+      - name: Build and push WEB Docker image
+        id: push
+        uses: docker/build-push-action@v6.5.0
+        with:
+          file: excel-table-web/Dockerfile
+          context: .
+          push: true
+          tags: ${{ env.WEB_IMAGE_TAG }}
 
       - name: Copy Compose Files to Droplet
         uses: appleboy/scp-action@master
@@ -56,8 +66,10 @@ jobs:
           script: |
             cd ${{ env.DEPLOY_DIR }}
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-            docker pull ${{ env.IMAGE_TAG }}
-            export EXCELTABLE_IMAGE=${{ env.IMAGE_TAG }}
+            docker pull ${{ env.API_IMAGE_TAG }}
+            docker pull ${{ env.WEB_IMAGE_TAG }}
+            export EXCELTABLE_IMAGE=${{ env.API_IMAGE_TAG }}
+            export EXCELTABLEWEB_IMAGE=${{ env.WEB_IMAGE_TAG }}
             docker-compose -f compose.yaml -f compose.prod.yaml down
             docker-compose -f compose.yaml -f compose.prod.yaml up -d
           

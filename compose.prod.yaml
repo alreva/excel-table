@@ -2,3 +2,6 @@
   api:
     image: ${EXCELTABLE_IMAGE}
     build: none
+  web:
+    image: ${EXCELTABLEWEB_IMAGE}
+    build: none

@@ -21,8 +21,20 @@
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CUSTOMCONNSTR_DefaultConnection: "Host=db;Port=5432;Database=excel;Username=postgres;Password=postgres"
+      AllowedOrigins: "http://localhost:8080,http://localhost:3000"
     ports:
       - "8080:8080"
     depends_on:
       db:
         condition: service_healthy
+  web:
+    image: exceltableweb
+    build:
+      context: .
+      dockerfile: excel-table-web/Dockerfile
+    environment:
+      BACKEND_API_URL: "http://api:8080"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
