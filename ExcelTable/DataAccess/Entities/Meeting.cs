@@ -12,7 +12,8 @@ public class Meeting
     [MaxLength(255)]
     public string? Progress { get; set; } = string.Empty;
 
-    public DateTimeOffset? Time { get; set; }
+    [MaxLength(255)]
+    public string? Time { get; set; }
 
     [MaxLength(255)]
     public string? Person { get; set; } = string.Empty;

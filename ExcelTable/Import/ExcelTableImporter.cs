@@ -6,9 +6,6 @@ namespace ExcelTable.Import;
 
 public static class ExcelTableImporter
 {
-    private static readonly CultureInfo Culture = CultureInfo.GetCultureInfo("en-US");
-    private static TimeZoneInfo CetZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
-    
     public static async Task ImportExcel(
         this ExcelTableDbContext db,
         IFormFile file)
@@ -33,7 +30,7 @@ public static class ExcelTableImporter
             {
                 Id = id,
                 Progress = worksheet.Cells[row, 2].Text,
-                Time = ParseDateTime(worksheet.Cells[row, 3]),
+                Time = worksheet.Cells[row, 3].Text,
                 Person = worksheet.Cells[row, 4].Text,
                 Position = worksheet.Cells[row, 5].Text,
                 CompanyAndBoothNumber = worksheet.Cells[row, 6].Text,
@@ -50,32 +47,5 @@ public static class ExcelTableImporter
         db.Meetings.AddRange(meetings);
         await db.SaveChangesAsync();
         await transaction.CommitAsync();
-    }
-
-    private static DateTimeOffset? ParseDateTime(ExcelRange cell)
-    {
-        DateTime meetingBaseTime;
-        if (cell.Value is DateTime dt)
-        {
-            // Excel date detected correctly
-            meetingBaseTime = dt;
-        }
-        else if (double.TryParse(cell.Text, out var oaDate))
-        {
-            // Excel numeric date
-            meetingBaseTime = DateTime.FromOADate(oaDate);
-        }
-        else if (DateTime.TryParse(cell.Text, Culture, out var parsedDto))
-        {
-            // Plain string parsing (fallback)
-            meetingBaseTime =  parsedDto;
-        }
-        else
-        {
-            return null; // fallback
-        }
-
-        return new DateTimeOffset(meetingBaseTime, CetZone.GetUtcOffset(meetingBaseTime))
-            .ToUniversalTime();
     }
 }
