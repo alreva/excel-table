@@ -1,0 +1,26 @@
+Id,Progress,Time,Person,Position,CompanyAndBoothNumber,Email,LinkedIn,Source,LeadStatus,AfterDiscussionNotes
+1,Scheduled,09:30 AM,John Smith,CTO,TechCorp #A123,john.smith@techcorp.com,linkedin.com/in/johnsmith,Trade Show,Hot Lead,Interested in enterprise solution
+2,Completed,10:15 AM,Sarah Johnson,VP Engineering,InnovSys #B234,sarah.j@innovsys.net,linkedin.com/in/sarahjohnson,Referral,Qualified,Follow up needed in 2 weeks
+3,In Progress,11:00 AM,Michael Chen,Product Manager,DataFlow #C345,m.chen@dataflow.io,linkedin.com/in/michaelchen,Conference,Warm Lead,Requested pricing information
+4,Scheduled,13:45 PM,Emily Davis,CEO,StartupX #D456,emily@startupx.com,linkedin.com/in/emilydavis,LinkedIn,New Contact,Initial meeting scheduled
+5,Completed,14:30 PM,James Wilson,Director Sales,CloudTech #E567,j.wilson@cloudtech.com,linkedin.com/in/jameswilson,Website,Hot Lead,Demo scheduled for next week
+6,Cancelled,15:15 PM,Lisa Brown,CIO,SecureNet #F678,lisa.brown@securenet.com,linkedin.com/in/lisabrown,Trade Show,Cold Lead,Reschedule needed
+7,Completed,16:00 PM,Robert Taylor,Lead Architect,BuildSoft #G789,robert@buildsoft.net,linkedin.com/in/roberttaylor,Referral,Qualified,Very positive discussion
+8,In Progress,09:00 AM,Amanda Lee,VP Marketing,MarketPro #H890,amanda.lee@marketpro.com,linkedin.com/in/amandalee,Conference,Warm Lead,Interested in integration options
+9,Scheduled,10:45 AM,David Miller,Technical Director,CodeCraft #I901,david.m@codecraft.com,linkedin.com/in/davidmiller,Website,Hot Lead,Budget approved
+10,Completed,11:30 AM,Jessica Wong,Solutions Architect,SoftSolutions #J012,j.wong@softsolutions.com,linkedin.com/in/jessicawong,LinkedIn,Qualified,Technical requirements discussed
+11,In Progress,13:15 PM,Ryan Cooper,Development Manager,DevPro #K123,ryan.c@devpro.net,linkedin.com/in/ryancooper,Trade Show,Warm Lead,Needs technical consultation
+12,Scheduled,14:00 PM,Maria Garcia,Project Lead,SystemX #L234,maria@systemx.com,linkedin.com/in/mariagarcia,Referral,New Contact,Initial requirements gathering
+13,Completed,15:45 PM,Thomas Anderson,IT Director,NetCorp #M345,t.anderson@netcorp.com,linkedin.com/in/thomasanderson,Conference,Hot Lead,Ready for proposal
+14,In Progress,16:30 PM,Sophie Martin,Software Architect,AppTech #N456,sophie.m@apptech.com,linkedin.com/in/sophiemartin,Website,Qualified,Technical evaluation ongoing
+15,Scheduled,09:15 AM,Kevin Park,Operations Manager,OptiSys #O567,kevin.p@optisys.net,linkedin.com/in/kevinpark,LinkedIn,Warm Lead,Scheduling proof of concept
+16,Completed,10:30 AM,Rachel Green,Product Owner,AgileTeam #P678,rachel@agileteam.com,linkedin.com/in/rachelgreen,Trade Show,Hot Lead,Moving to contract phase
+17,In Progress,11:45 AM,Daniel Lee,Engineering Lead,TechFlow #Q789,d.lee@techflow.com,linkedin.com/in/daniellee,Referral,Qualified,Architecture review planned
+18,Scheduled,13:30 PM,Emma Wilson,Integration Specialist,IntegrateX #R890,emma.w@integratex.net,linkedin.com/in/emmawilson,Conference,New Contact,Integration assessment needed
+19,Completed,14:45 PM,Christopher Hall,DevOps Lead,DevOps Pro #S901,chris.h@devopspro.com,linkedin.com/in/christopherhall,Website,Hot Lead,CI/CD implementation discussed
+20,In Progress,15:30 PM,Michelle Chang,System Analyst,AnalyticsCo #T012,m.chang@analyticsco.com,linkedin.com/in/michellechang,LinkedIn,Warm Lead,Requirements analysis ongoing
+21,Scheduled,16:15 PM,Andrew Baker,Technical Lead,LeadTech #U123,andrew.b@leadtech.net,linkedin.com/in/andrewbaker,Trade Show,Qualified,Technical deep dive planned
+22,Completed,09:45 AM,Laura Martinez,Software Manager,CodeHub #V234,laura.m@codehub.com,linkedin.com/in/lauramartinez,Referral,Hot Lead,Solution design approved
+23,In Progress,10:00 AM,Steven Wright,Cloud Architect,CloudArch #W345,s.wright@cloudarch.com,linkedin.com/in/stevenwright,Conference,Qualified,Cloud migration discussion
+24,Scheduled,11:15 AM,Patricia Kim,Security Officer,SecureIT #X456,patricia@secureit.net,linkedin.com/in/patriciakim,Website,New Contact,Security assessment scheduled
+25,Completed,12:00 PM,Mark Thompson,Integration Manager,IntegraSys #Y567,mark.t@integrasys.com,linkedin.com/in/markthompson,LinkedIn,Hot Lead,Integration requirements finalized
